@@ -9,6 +9,8 @@ class App extends Component {
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
+          <body>Hello, I am Chris first time putting an applications on to heroku
+          using react base javascripts</body>
         </div>
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
