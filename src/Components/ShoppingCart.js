@@ -21,6 +21,28 @@ class ShoppingCart extends React.Component {
     };
   }
 
+  removeProduct(product){
+    const cartTotal = this.state.cartTotal;
+    const newCartTotal = Math.round((cartTotal - product.price + 0.00001) * 100 ) / 100;
+    const cartProduct = this.state.cartProduct;
+    let existingEntry;
+    for (var i = 0; i < cartProduct.length; i++){
+      if (cartProduct[i].name === product.name){
+        existingEntry = cartProduct[i];
+        break;
+      }
+    }
+    if (existingEntry && existingEntry.amount == 1) {
+      cartProduct.splice(cartProduct.indexOf(existingEntry));
+    }else {
+      existingEntry.amount -= 1;
+    }
+    this.setState({
+      cartTotal:newCartTotal,
+      cartProduct:cartProduct,
+    })
+  }
+
   addProduct(product){
     const cartTotal = this.state.cartTotal;
     const newCartTotal = Math.round((cartTotal + product.price + 0.00001) * 100 ) / 100;
@@ -56,6 +78,8 @@ class ShoppingCart extends React.Component {
               <h3>{product.name}</h3>
               <h3>{product.amount}</h3>
               <h3>{product.price}</h3>
+              <button onClick={() => this.addProduct(product)}>ADD</button>
+              <button onClick={() => this.removeProduct(product)}>REMOVE</button>
             </div>
           )}
         </div>
